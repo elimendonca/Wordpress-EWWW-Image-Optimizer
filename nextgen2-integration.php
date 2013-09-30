@@ -16,7 +16,7 @@ class ewwwngg {
 		add_action('wp_ajax_bulk_ngg_loop', array(&$this, 'ewww_ngg_bulk_loop'));
 		add_action('wp_ajax_bulk_ngg_cleanup', array(&$this, 'ewww_ngg_bulk_cleanup'));
 		add_action('wp_ajax_ewww_ngg_thumbs', array(&$this, 'ewww_ngg_thumbs_only'));
-		add_action('ngg_after_new_images_added', array(&$this, 'ewww_ngg_new_thumbs'), 10, 2);
+		//add_action('ngg_after_new_images_added', array(&$this, 'ewww_ngg_new_thumbs'), 10, 2);
 		register_setting('ewww_image_optimizer_options', 'ewww_image_optimizer_bulk_ngg_resume');
 		register_setting('ewww_image_optimizer_options', 'ewww_image_optimizer_bulk_ngg_attachments');
 	}
@@ -29,18 +29,25 @@ class ewwwngg {
 
 	/* ngg_added_new_image hook */
 	function ewww_added_new_image ($image) {
-		// query the filesystem path of the gallery from the database
-		global $wpdb;
-		$q = $wpdb->prepare( "SELECT path FROM {$wpdb->prefix}ngg_gallery WHERE gid = %d LIMIT 1", $image['galleryID'] );
-		$gallery_path = $wpdb->get_var($q);
-		// if we have a path to work with
-		if ( $gallery_path ) {
-			// construct the absolute path of the current image
-			$file_path = trailingslashit($gallery_path) . $image['filename'];
-			// run the optimizer on the current image
-			$res = ewww_image_optimizer(ABSPATH . $file_path, 2, false, false);
-			// update the metadata for the optimized image
-			nggdb::update_image_meta($image['id'], array('ewww_image_optimizer' => $res[1]));
+		// creating the 'registry' object for working with nextgen
+		$registry = C_Component_Registry::get_instance();
+		// creating a database storage object from the 'registry' object
+		$storage  = $registry->get_utility('I_Gallery_Storage');
+		// find the image id
+		$image_id = $storage->object->_get_image_id($image);
+		// get an array of sizes available for the $image
+		$sizes = $storage->get_image_sizes($image);
+		// run the optimizer on the image for each $size
+		foreach ($sizes as $size) {
+			// get the absolute path
+			$file_path = $storage->get_image_abspath($image, $size);
+			// optimize the image and grab the results
+			$res = ewww_image_optimizer($file_path, 2, false, false);
+			// only if we're dealing with the full-size original
+			if ($size === 'full') {
+				// update the metadata for the optimized image
+				nggdb::update_image_meta($image_id, array('ewww_image_optimizer' => $res[1]));
+			}
 		}
 	}
 
@@ -145,15 +152,15 @@ class ewwwngg {
 			// get the metadata for the image
 			$meta = new nggMeta( $id );
 			// get the optimization status for the image
-			$status = $meta->get_META( 'ewww_image_optimizer' );
+			$status = $meta->get_META('ewww_image_optimizer');
 			$msg = '';
 			// get the file path of the image
 			$file_path = $meta->image->imagePath;
 			// get the mimetype of the image
 			$type = ewww_image_optimizer_mimetype($file_path, 'i');
 			// retrieve the human-readable filesize of the image
-			$file_size = size_format(filesize($file_path), 2);
-			$file_size = str_replace('B ', 'B', $file_size);
+	                $file_size = size_format(filesize($file_path), 2);
+       		        $file_size = str_replace('B ', 'B', $file_size);
 			//$file_size = ewww_image_optimizer_format_bytes(filesize($file_path));
 			$valid = true;
 			// check to see if we have a tool to handle the mimetype detected
@@ -360,7 +367,7 @@ class ewwwngg {
                         wp_die( __( 'Cheatin&#8217; eh?' ) );
                 }
 		// need this file to work with metadata
-		require_once(WP_CONTENT_DIR . '/plugins/nextgen-gallery/lib/meta.php');
+		require_once(WP_CONTENT_DIR . '/plugins/nextgen-gallery/products/photocrati_nextgen/modules/ngglegacy/lib/meta.php');
 		$id = $_POST['attachment'];
 		// get the meta for the image
 		$meta = new nggMeta($id);
@@ -377,7 +384,7 @@ class ewwwngg {
                         wp_die( __( 'Cheatin&#8217; eh?' ) );
                 }
 		// need this file to work with metadata
-		require_once(WP_CONTENT_DIR . '/plugins/nextgen-gallery/lib/meta.php');
+		require_once(WP_CONTENT_DIR . '/plugins/nextgen-gallery/products/photocrati_nextgen/modules/ngglegacy/lib/meta.php');
 		// find out what time we started, in microseconds
 		$started = microtime(true);
 		$id = $_POST['attachment'];
