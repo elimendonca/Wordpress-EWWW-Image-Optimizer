@@ -1,23 +1,23 @@
 === EWWW Image Optimizer ===
 Contributors: nosilver4u
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFXCW38HE24NY
-Tags: images, image, attachments, attachment, optimize
+Tags: images, image, attachments, attachment, optimize, nextgen, buddypress, flagallery, flash, gallery, lossless, photos, photo, picture, pictures, seo, compression
 Requires at least: 2.8
-Tested up to: 3.5.1
-Stable tag: 1.4.4
+Tested up to: 3.6.1
+Stable tag: 1.6.2
 License: GPLv3
 
-Reduce file sizes for images within WordPress including NextGEN Gallery and GRAND FlAGallery. Uses jpegtran, optipng/pngout, and gifsicle.
+Reduce file sizes for images within WordPress including NextGEN, GRAND FlAGallery and BuddyPress. Uses jpegtran, optipng/pngout, and gifsicle.
 
 == Description ==
 
-The EWWW Image Optimizer is a WordPress plugin that will automatically and losslessly optimize your images as you upload them to your blog. It can also optimize the images that you have already uploaded in the past. It is also now possible to convert your images automatically to the file format that will produce the smallest image (make sure you read the WARNINGS).
+The EWWW Image Optimizer is a WordPress plugin that will automatically and losslessly optimize your images as you upload them to your blog. It can also optimize the images that you have already uploaded in the past. It is also possible to convert your images automatically to the file format that will produce the smallest image size (make sure you read the WARNINGS).
 
 By default, EWWW Image Optimizer uses lossless optimization techniques, so your image quality will be exactly the same before and after the optimization. The only thing that will change is your file size. The one small exception to this is GIF animations. While the optimization is technically lossless, you will not be able to properly edit the animation again without performing an --unoptimize operation with gifsicle. The gif2png and jpg2png conversions are also lossless but the png2jpg process is not lossless.
 
 Images are optimized using the [jpegtran](http://jpegclub.org/jpegtran/), [optipng](http://optipng.sourceforge.net/), [pngout](advsys.net/ken/utils.htm), and [gifsicle](http://www.lcdf.org/gifsicle/) image tools (available for free). For PNG files, either optipng or pngout can be used. If you want the best optimization, install both, set optipng to level 3 (beyond that is just crazy and rarely yields significant gains) and pngout to level 0. Images are converted using the above tools and GD or 'convert' (ImageMagick).
 
-EWWW Image Optimizer calls optimization utilities directly which is well suited to shared hosting situations where these utilities may already be installed. Pre-compiled binaries/executables are provided for optipng, gifsicle, and jpegtran. Pngout can be installed with one-click from the settings page.
+EWWW Image Optimizer calls optimization utilities directly which is well suited to shared hosting situations where these utilities may already be installed. Pre-compiled binaries/executables are provided for optipng, gifsicle, and jpegtran. Pngout can be installed with one-click from the settings page. If none of that works, there is a new cloud option (currently in BETA) that will work for those who cannot run the optimizers on their own server.
 
 **Why use EWWW Image Optimizer?**
 
@@ -26,16 +26,24 @@ EWWW Image Optimizer calls optimization utilities directly which is well suited 
 1. **Less bandwidth usage.** Optimizing your images can save you hundreds of KB per image, which means significantly less bandwidth usage.
 1. **Super fast.** Because it runs on your own server, you don’t have to wait for a third party service to receive, process, and return your images. You can optimize hundreds of images in just a few minutes. PNG files take the longest, but you can adjust the settings for your situation.
 1. **Better PNG optimization.** YOu can use pngout and optipng in conjunction.
-1. **Root access not needed** Pre-compiled binaries are made available to install directly within the Wordpress folder. 
+1. **Root access not needed** Pre-compiled binaries are made available to install directly within the Wordpress folder, and cloud optimization is provided for those who cannot run the binaries locally.
+
+= Theme Images =
+
+In the Appearance menu, it is now possible to optimize all of the images within your current theme (you must have permissions to edit themes). If you are using a child theme, the images for the parent theme will also be optimized. If the theme is updated, you will need to re-optimize, so it is recommended that you contact the theme author if you find significant savings are possible.
 
 = NextGEN Integration =
 
-Features re-optimization capability, and bulk optimizing. The NextGEN Bulk Optimize function is located near the bottom of the NextGEN menu, and will optimize all images in all galleries.
-NOTE: Does not optimize thumbnails on initial upload, 1.4.1+ will provide the option to optimize thumbnails after uploading images.
+Features optimization on upload capability, re-optimization, and bulk optimizing. The NextGEN Bulk Optimize function is located near the bottom of the NextGEN menu, and will optimize all images in all galleries. It is also possible to optimize groups of images in a gallery, or multiple galleries at once.
+NOTE: Does not optimize thumbnails on initial upload for legacy (1.9.x) versions of NextGEN, but instead provides a button to optimize thumbnails after uploading images.
 
 = GRAND Flash Album Gallery Integration =
 
 Features optimization on upload capability, re-optimization, and bulk optimizing. The Bulk Optimize function is located near the bottom of the FlAGallery menu, and will optimize all images in all galleries. It is also possible to optimize groups of images in a gallery, or multiple galleries at once.
+
+= BuddyPress Integration =
+
+Located under Media, the BuddyPress Optimizer allows the user to optimize all avatars (group and individual). Stores a history of optimized images, so that you can optimize new images without re-optimizing old images.
 
 == Installation ==
 
@@ -131,8 +139,31 @@ That's not a question, but since I made it up, I'll answer it. See the Image Opt
 
 = future =
 * these are possible future bugfixes and/or feature requests, if you see a feature you like here, go vote for it in the support forum
-* BuddyPress integration
 * SunOS (Solaris/OpenIndiana) support
+* WP Symposium support
+* Bulk restoration of converted images
+
+= 1.6.2 =
+* added license exceeded status into status message so users know if they've gone over
+* prevent tool checks and cloud verification from firing on every page load, yikes...
+
+= 1.6.1 =
+fixed: temporary jpgs were not being deleted (leftovers from testing for last release)
+fixed: jpgs would not be converted to pngs if jpgs had already been optimized
+fixed: cloud service not converting gif to png
+
+= 1.6.0 =
+* Cloud Optimization option (BETA: get your free API key at http://www.exactlywww.com/cloud/)
+* fixed if exec() is disabled or safe mode is on, don't bother testing local tools
+* more tweaks for exec() detection, including suhosin extension
+
+= 1.5.0 =
+* BuddyPress integration to optimize avatars
+* added function to optimize all images in currently active theme
+* full compatibility with NextGEN 2.0.x
+* thumbnails are now optimized automatically on upload with NextGEN 2.0.x
+* fixed detection of disabled exec() function when exec is the first function in the list
+* use internal wordpress functions for retrieving image path, displaying filesize, building redirect urls, and downloading pngout
 
 = 1.4.4 =
 * fixed bulk optimization functions for non-English users in NextGEN
@@ -329,8 +360,16 @@ That's not a question, but since I made it up, I'll answer it. See the Image Opt
 
 == Upgrade Notice ==
 
-= 1.4.4 =
+= 1.6.2 =
+* All Cloud users should upgrade immediately to avoid extended page load times
 
+= 1.6.1 =
+* New Cloud Optimization option for those who can't (or won't) enable exec() on their servers (BETA: get your free API key at http://www.exactlywww.com/cloud/)
+
+= 1.5.0 =
+Fixes and enhancements for NextGEN 2, Buddypress support, and theme image optimization
+
+= 1.4.4 =
 bugfix release for nextgen users only, everyone else can ignore this release
 
 = 1.4.0 =
