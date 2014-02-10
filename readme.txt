@@ -1,18 +1,10 @@
 === EWWW Image Optimizer ===
 Contributors: nosilver4u
-<<<<<<< HEAD
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFXCW38HE24NY
-Tags: images, image, attachments, attachment, optimize, optimization, nextgen, buddypress, flagallery, flash-gallery, lossless, photos, photo, picture, pictures, seo, compression, image-store, imstore, slider, image editor, gmagick, wp-symposium, meta-slider, metaslider
-Requires at least: 3.1
-Tested up to: 3.7.1
-Stable tag: 1.7.3
-=======
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MKMQKCBFFG3WW
 Tags: images, image, attachments, attachment, optimize, optimization, nextgen, buddypress, flagallery, flash-gallery, lossless, photos, photo, picture, pictures, seo, compression, image-store, imstore, slider, image editor, gmagick, wp-symposium, meta-slider, metaslider
 Requires at least: 3.5
 Tested up to: 3.8
 Stable tag: 1.7.6
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 License: GPLv3
 
 Reduce file sizes for images within WordPress including NextGEN, GRAND FlAGallery and more. Uses jpegtran, optipng, pngout, and gifsicle.
@@ -37,13 +29,6 @@ EWWW Image Optimizer calls optimization utilities directly which is well suited 
 1. **Root access not needed** Pre-compiled binaries are made available to install directly within the Wordpress folder, and cloud optimization is provided for those who cannot run the binaries locally.
 1. **Optimize almost anything** Using the Optimize More tool, and the wp_image_editor class extension, nearly any image in Wordpress can be optimized.
 
-<<<<<<< HEAD
-= NextGEN Gallery =
-
-Features optimization on upload capability, re-optimization, and bulk optimizing. The NextGEN Bulk Optimize function is located near the bottom of the NextGEN menu, and will optimize all images in all galleries. It is also possible to optimize groups of images in a gallery, or multiple galleries at once.
-NOTE: Does not optimize thumbnails on initial upload for legacy (1.9.x) versions of NextGEN, but instead provides a button to optimize thumbnails after uploading images.
-
-=======
 If you need a version of this plugin for cloud use only, see [EWWW Image Optimizer Cloud](http://wordpress.org/plugins/ewww-image-optimizer-cloud/). It is much more compact as it does not contain any binaries or any mention of the exec() function.
 
 = WP Image Editor = 
@@ -59,7 +44,6 @@ As of version 1.7.0, site admins can specify any folder within their wordpress f
 Features optimization on upload capability, re-optimization, and bulk optimizing. The NextGEN Bulk Optimize function is located near the bottom of the NextGEN menu, and will optimize all images in all galleries. It is also possible to optimize groups of images in a gallery, or multiple galleries at once.
 NOTE: Does not optimize thumbnails on initial upload for legacy (1.9.x) versions of NextGEN, but instead provides a button to optimize thumbnails after uploading images.
 
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 = GRAND Flash Album Gallery =
 
 Features optimization on upload capability, re-optimization, and bulk optimizing. The Bulk Optimize function is located near the bottom of the FlAGallery menu, and will optimize all images in all galleries. It is also possible to optimize groups of images in a gallery, or multiple galleries at once.
@@ -72,16 +56,6 @@ Located under Media, the BuddyPress Optimizer allows the user to optimize all av
 
 Uploads are automatically optimized. Look for Optimize under the Image Store (Galleries) menu to see status of optimization and for re-optimization and bulk-optimization options. Using the Bulk Optimization tool under Media Library automatically includes all Image Store uploads.
 
-<<<<<<< HEAD
-= WP Image Editor = 
-
-All images created by the new WP_Image_Editor class in WP 3.5 will be automatically optimized. Current implementations are GD, Imagick, and Gmagick. Images optimized via this class include Meta Slider, BuddyPress Activity Plus (thumbs) and probably countless others. If you have a plugin that uses WP_Image_Editor and would like EWWW IO to be able to optimize previous uploads, post a thread in the support forums.
-
-= Optimize Almost Everything =
-As of version 1.7.0, site admins can specify any folder within their wordpress folder to be optimized. The 'Optimize More' option under Tools will optimize theme images, BuddyPress avatars, BuddyPress Activity Plus images, Meta Slider slides, WP Symposium images, GD bbPress attachments, and any user-specified folders. Additionally, this tool can run on an hourly basis via wp_cron to keep newly uploaded images optimized. Any images optimized via this tool are stored in the database so that the optimizer does not attempt to re-optimize them unless they are modified (and so you can take a look at the table to see what exactly is being optimized).
-
-=======
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 == Installation ==
 
 1. Upload the 'ewww-image-optimizer' plugin to your '/wp-content/plugins/' directory.
@@ -147,19 +121,11 @@ Yes, but only if the optimized version is smaller. The plugin should NEVER creat
 
 = Can I resize my images with this plugin? =
 
-<<<<<<< HEAD
-No, that would be a lossy operation, and we try to avoid that.
-
-= Can I lower the compression setting for JPGs to save more space? =
-
-Again, that would be a lossy operation, and we try to avoid that.
-=======
 No, that would be a lossy operation, and we try to avoid that. Use Imsanity.
 
 = Can I lower the compression setting for JPGs to save more space? =
 
 Again, that would be a lossy operation, and we try to avoid that. Use Imsanity.
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 
 = The bulk optimizer doesn't seem to be working, what can I do? =
 
@@ -167,11 +133,7 @@ Each image is given 50 seconds to complete (which actually doesn't include time 
 
 = What are the supported operating systems? =
 
-<<<<<<< HEAD
-I've tested it on Windows (with Apache), Linux, Mac OSX, and FreeBSD. The cloud service will run on any OS.
-=======
 I've tested it on Windows (with Apache), Linux, Mac OSX, FreeBSD, and Solaris (v10). The cloud service will run on any OS.
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 
 = How are JPGs optimized? =
 
@@ -203,11 +165,6 @@ That's not a question, but since I made it up, I'll answer it. See the Image Opt
 
 = future =
 * these are possible future bugfixes and/or feature requests, if you see a feature you like here, go vote for it in the support forum
-<<<<<<< HEAD
-* SunOS (Solaris/OpenIndiana) support
-* Bulk restoration of converted images
-* FlaGallery optimize on upload does not work with plupload (only the browser-based method works properly). This will be implemented in a future release.
-=======
 * throttling: ability to specify number of images to optimize in a batch via bulk optimize, and seconds between batches
 * show statistics: display cumulative savings and computation time in status section
 * webp support
@@ -242,7 +199,6 @@ That's not a question, but since I made it up, I'll answer it. See the Image Opt
 * fixed: invalid status on some systems for 'tar' command
 * new: SunOS support - OpenIndiana and Solaris
 * fixed: resizes not properly checking for re-optimization prevention
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 
 = 1.7.3 =
 * fixed: some security plugins disable Optimize More - use install_themes permission instead of edit_themes
@@ -508,11 +464,6 @@ That's not a question, but since I made it up, I'll answer it. See the Image Opt
 
 == Upgrade Notice ==
 
-<<<<<<< HEAD
-= 1.7.2 =
-* Optimize More table format has changed, make sure to visit Optimize More and Convert your table immediately after upgrade if you are running it in scheduled mode.
-
-=======
 = 1.7.6 =
 * metadata stripping now applies to PNG images, but only if using optipng 0.7.x, you may want to run a bulk optimize on all your PNG images to make sure you have the best possible optimization
 
@@ -522,7 +473,6 @@ That's not a question, but since I made it up, I'll answer it. See the Image Opt
 = 1.7.2 =
 * Optimize More table format has changed, make sure to visit Optimize More and Convert your table immediately after upgrade if you are running it in scheduled mode.
 
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 = 1.7.0 =
 * More third-party plugins supported via custom paths, and the Optimize More tool (which can also run via cron now). Also check out new screencasts on the Installation page.
 
@@ -571,36 +521,18 @@ Improved performance for PNGs by specifying proper optimization level
 == Contact and Credits ==
 
 Written by [Shane Bishop](http://www.shanebishop.net). Based upon CW Image Optimizer, which was written by [Jacob Allred](http://www.jacoballred.com/) at [Corban Works, LLC](http://www.corbanworks.com/). CW Image Optimizer was based on WP Smush.it.
-<<<<<<< HEAD
-[Hammer](http://thenounproject.com/noun/hammer/#icon-No1306) designed by [John Caserta](http://thenounproject.com/johncaserta) from The Noun Project
-[Images](http://thenounproject.com/noun/images/#icon-No22772) designed by [Simon Henrotte](http://thenounproject.com/Gizmodesbois) from The Noun Project
-=======
 [Hammer](http://thenounproject.com/noun/hammer/#icon-No1306) designed by [John Caserta](http://thenounproject.com/johncaserta) from The Noun Project.
 [Images](http://thenounproject.com/noun/images/#icon-No22772) designed by [Simon Henrotte](http://thenounproject.com/Gizmodesbois) from The Noun Project.
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 
 == Webhosts ==
 
 In general, these lists only apply to shared hosting services. If the providers below have VPS or dedicated server options, those will likely work just fine. If you have any contributions or corrections to these lists, please contact me via the form at http://www.shanebishop.net
 
-<<<<<<< HEAD
-Known good webhosts where things work out of the box.
-=======
 Webhosts where things work out of the box.
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 
 * [Bluehost](http://www.bluehost.com)
 * [Dreamhost](http://www.dreamhost.com)
 * [GoDaddy](http://www.godaddy.com) (only with PHP 5.3)
-<<<<<<< HEAD
-* [WebFaction](http://www.webfaction.com)
-* [Hosterdam](http://www.hosterdam.com) (FreeBSD)
-* [OVH](http://www.ovh.co.uk)
-* [Hetzner Online](http://www.hetzner.de)
-* [Namecheap](http://www.namecheap.com)
-
-List of known bad webhosts where the plugin will only work in cloud mode or only some tools are installed locally.
-=======
 * [gPowerHost](https://gpowerhost.com/)
 * [HostGator](http://www.hostgator.com)
 * [Hetzner Online](http://www.hetzner.de)
@@ -610,25 +542,15 @@ List of known bad webhosts where the plugin will only work in cloud mode or only
 * [WebFaction](http://www.webfaction.com)
 
 Webhosts where the plugin will only work in cloud mode or only some tools are installed locally.
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 
 * ipower
 * Gandi
 * ipage (JPG only)
-<<<<<<< HEAD
-=======
 * WP Engine - use EWWW Image Optimizer Cloud fork: http://wordpress.org/plugins/ewww-image-optimizer-cloud/
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 
 == Translations ==
 
 Translators: 
-<<<<<<< HEAD
-
-1. Please post in the support forums announcing your intent to translate the plugin into a particular language. 
-1. Download ewww-image-optimizer.pot from the plugin /languages/ folder.
-1. Fill in the message strings and header information and save it as a .po file.
-=======
 Romanian translation by MediasInfo.ro.
 Spanish translation by Andrew Kurtis of WebHostingHub.
 Dutch translation by Ludo Rubben.
@@ -637,5 +559,4 @@ Dutch translation by Ludo Rubben.
 1. Download ewww-image-optimizer.pot from the plugin /languages/ folder.
 1. Fill in the msgstr for each msgid and complete the header information as best as you can.
 1. Save it as a .po file.
->>>>>>> e499c84faad433b0951f37487d6dc8e1f72c579a
 1. Submit it via the form at http://www.shanebishop.net/contact-me/
