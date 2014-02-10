@@ -1,41 +1,60 @@
 === EWWW Image Optimizer ===
 Contributors: nosilver4u
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFXCW38HE24NY
-Tags: images, image, attachments, attachment, optimize
-Requires at least: 2.8
-Tested up to: 3.5.1
-Stable tag: 1.4.4
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MKMQKCBFFG3WW
+Tags: images, image, attachments, attachment, optimize, optimization, nextgen, buddypress, flagallery, flash-gallery, lossless, photos, photo, picture, pictures, seo, compression, image-store, imstore, slider, image editor, gmagick, wp-symposium, meta-slider, metaslider
+Requires at least: 3.5
+Tested up to: 3.8
+Stable tag: 1.7.6
 License: GPLv3
 
-Reduce file sizes for images within WordPress including NextGEN Gallery and GRAND FlAGallery. Uses jpegtran, optipng/pngout, and gifsicle.
+Reduce file sizes for images within WordPress including NextGEN, GRAND FlAGallery and more. Uses jpegtran, optipng, pngout, and gifsicle.
 
 == Description ==
 
-The EWWW Image Optimizer is a WordPress plugin that will automatically and losslessly optimize your images as you upload them to your blog. It can also optimize the images that you have already uploaded in the past. It is also now possible to convert your images automatically to the file format that will produce the smallest image (make sure you read the WARNINGS).
+The EWWW Image Optimizer is a WordPress plugin that will automatically and losslessly optimize your images as you upload them to your blog. It can also optimize the images that you have already uploaded in the past. It is also possible to convert your images automatically to the file format that will produce the smallest image size (make sure you read the WARNINGS).
 
 By default, EWWW Image Optimizer uses lossless optimization techniques, so your image quality will be exactly the same before and after the optimization. The only thing that will change is your file size. The one small exception to this is GIF animations. While the optimization is technically lossless, you will not be able to properly edit the animation again without performing an --unoptimize operation with gifsicle. The gif2png and jpg2png conversions are also lossless but the png2jpg process is not lossless.
 
 Images are optimized using the [jpegtran](http://jpegclub.org/jpegtran/), [optipng](http://optipng.sourceforge.net/), [pngout](advsys.net/ken/utils.htm), and [gifsicle](http://www.lcdf.org/gifsicle/) image tools (available for free). For PNG files, either optipng or pngout can be used. If you want the best optimization, install both, set optipng to level 3 (beyond that is just crazy and rarely yields significant gains) and pngout to level 0. Images are converted using the above tools and GD or 'convert' (ImageMagick).
 
-EWWW Image Optimizer calls optimization utilities directly which is well suited to shared hosting situations where these utilities may already be installed. Pre-compiled binaries/executables are provided for optipng, gifsicle, and jpegtran. Pngout can be installed with one-click from the settings page.
+EWWW Image Optimizer calls optimization utilities directly which is well suited to shared hosting situations where these utilities may already be installed. Pre-compiled binaries/executables are provided for optipng, gifsicle, and jpegtran. Pngout can be installed with one-click from the settings page. If none of that works, there is a cloud option that will work for those who cannot run the optimizers on their own server.
 
 **Why use EWWW Image Optimizer?**
 
 1. **Your pages will load faster.** Smaller image sizes means faster page loads. This will make your visitors happy, and can increase ad revenue.
 1. **Faster backups.** Smaller image sizes also means faster backups.
 1. **Less bandwidth usage.** Optimizing your images can save you hundreds of KB per image, which means significantly less bandwidth usage.
-1. **Super fast.** Because it runs on your own server, you don’t have to wait for a third party service to receive, process, and return your images. You can optimize hundreds of images in just a few minutes. PNG files take the longest, but you can adjust the settings for your situation.
-1. **Better PNG optimization.** YOu can use pngout and optipng in conjunction.
-1. **Root access not needed** Pre-compiled binaries are made available to install directly within the Wordpress folder. 
+1. **Super fast.** The plugin can run on your own server, so you don’t have to wait for a third party service to receive, process, and return your images. You can optimize hundreds of images in just a few minutes. PNG files take the longest, but you can adjust the settings for your situation.
+1. **Better PNG optimization.** You can use pngout and optipng in conjunction.
+1. **Root access not needed** Pre-compiled binaries are made available to install directly within the Wordpress folder, and cloud optimization is provided for those who cannot run the binaries locally.
+1. **Optimize almost anything** Using the Optimize More tool, and the wp_image_editor class extension, nearly any image in Wordpress can be optimized.
 
-= NextGEN Integration =
+If you need a version of this plugin for cloud use only, see [EWWW Image Optimizer Cloud](http://wordpress.org/plugins/ewww-image-optimizer-cloud/). It is much more compact as it does not contain any binaries or any mention of the exec() function.
 
-Features re-optimization capability, and bulk optimizing. The NextGEN Bulk Optimize function is located near the bottom of the NextGEN menu, and will optimize all images in all galleries.
-NOTE: Does not optimize thumbnails on initial upload, 1.4.1+ will provide the option to optimize thumbnails after uploading images.
+= WP Image Editor = 
 
-= GRAND Flash Album Gallery Integration =
+All images created by the new WP_Image_Editor class in WP 3.5 will be automatically optimized. Current implementations are GD, Imagick, and Gmagick. Images optimized via this class include Meta Slider, BuddyPress Activity Plus (thumbs), WP Retina 2x, Imsanity, Simple Image Sizes and probably countless others. If you have a plugin that uses WP_Image_Editor and would like EWWW IO to be able to optimize previous uploads, post a thread in the support forums.
+
+= Optimize Almost Everything =
+
+As of version 1.7.0, site admins can specify any folder within their wordpress folder to be optimized. The 'Optimize More' option under Tools will optimize theme images, BuddyPress avatars, BuddyPress Activity Plus images, Meta Slider slides, WP Symposium images, GD bbPress attachments, and any user-specified folders. Additionally, this tool can run on an hourly basis via wp_cron to keep newly uploaded images optimized. Any images optimized via this tool are stored in the database so that the optimizer does not attempt to re-optimize them unless they are modified (and so you can take a look at the table to see what exactly is being optimized).
+
+= NextGEN Gallery =
+
+Features optimization on upload capability, re-optimization, and bulk optimizing. The NextGEN Bulk Optimize function is located near the bottom of the NextGEN menu, and will optimize all images in all galleries. It is also possible to optimize groups of images in a gallery, or multiple galleries at once.
+NOTE: Does not optimize thumbnails on initial upload for legacy (1.9.x) versions of NextGEN, but instead provides a button to optimize thumbnails after uploading images.
+
+= GRAND Flash Album Gallery =
 
 Features optimization on upload capability, re-optimization, and bulk optimizing. The Bulk Optimize function is located near the bottom of the FlAGallery menu, and will optimize all images in all galleries. It is also possible to optimize groups of images in a gallery, or multiple galleries at once.
+
+= BuddyPress =
+
+Located under Media, the BuddyPress Optimizer allows the user to optimize all avatars (group and individual). Stores a history of optimized images, so that you can optimize new images without re-optimizing old images.
+
+= Image Store =
+
+Uploads are automatically optimized. Look for Optimize under the Image Store (Galleries) menu to see status of optimization and for re-optimization and bulk-optimization options. Using the Bulk Optimization tool under Media Library automatically includes all Image Store uploads.
 
 == Installation ==
 
@@ -43,13 +62,20 @@ Features optimization on upload capability, re-optimization, and bulk optimizing
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. Ensure jpegtran, optipng, pngout and gifsicle are installed on your Linux server (basic installation instructions are below if they are not). You will receive a warning when you activate the plugin if they are not present. This message will go away once you have them installed.
 1. The plugin will attempt to install jpegtran, optipng, and gifsicle automatically for you. This requires that the wp-content folder is writable by the user running the web server.
-1. If the automatic install did not work, find the appropriate binaries for your system in the ewww-image-optimizer plugin folder, copy them to wp-content/ewww/ and remove the OS 'tag' (like -linux or -fbsd). No renaming is necessary on Windows, just copy the .exe files to the wp-content/ewww folder. IMPORTANT: Do not symlink or modify the binaries in any way, or they will not pass the security checks.
+1. If the automatic install did not work, find the appropriate binaries for your system in the ewww-image-optimizer plugin folder, copy them to wp-content/ewww/ and remove the OS 'tag' (like -linux or -fbsd). No renaming is necessary on Windows, just copy the .exe files to the wp-content/ewww folder. IMPORTANT: Do not symlink or modify the binaries in any way, or they will not pass the security checks. If you transfer files via FTP, be sure to transfer in binary mode, not ascii or text.
+1. If the binaries don't run locally, you can sign up for the EWWW IO cloud service to run them via a third-party server: http://www.exactlywww.com/cloud/
 1. *Optional* Visit the settings page to enable/disable specific tools and turn on advanced optimization features.
 1. Done!
 
+EWWW IO Installation and Configuration:
+[youtube http://www.youtube.com/watch?v=uEU4DbDm3r0]
+
+Using EWWW IO:
+[youtube http://www.youtube.com/watch?v=6NKBfmE00vM]
+
 = Installing pngout =
 
-Pngout is new in version 1.1.0 and is not enabled by default because it is resource intensive. Optipng is the preferred PNG optimizer if you have resource (CPU) constraints. Pngout is also not open-source for those who care about such things, but the command-line version is free.
+Pngout is not enabled by default because it is resource intensive. Optipng is the preferred PNG optimizer if you have resource (CPU) constraints. Pngout is also not open-source for those who care about such things, but the command-line version is free.
 
 1. Go to the settings page.
 1. Uncheck the option to disable pngout and Save your settings.
@@ -82,10 +108,10 @@ Pngout is new in version 1.1.0 and is not enabled by default because it is resou
 1. Gifsicle is now bundled with the plugin. If it isn't working for you, keep going...
 1. If you have root access to your server, you can install gifsicle from the standard repositories (yum/rpm or apt/deb). If you are on shared hosting, read on... These steps can/should generally all be done via the command line
 1. Download the latest version of [gifsicle](http://www.lcdf.org/gifsicle/) to your home directory
-1. Uncompress gifsicle: *tar xvzf gifsicle-1.70.tar.gz && cd gifsicle-1.70*
+1. Uncompress gifsicle: *tar xvzf gifsicle-1.78.tar.gz && cd gifsicle-1.78*
 1. Configure and compile gifsicle (we disable gifview and gifdiff as they are not needed): *./configure --disable-gifdiff --disable-gifview && make*
 1. If you have root access, install it with *make install*
-1. If not, copy the binary from */gifsicle-1.70/src/gifsicle* to the ewww tool folder (wordpress/wp-content/ewww/gifsicle-custom).
+1. If not, copy the binary from */gifsicle-1.78/src/gifsicle* to the ewww tool folder (wordpress/wp-content/ewww/gifsicle-custom).
 
 == Frequently Asked Questions ==
 
@@ -93,13 +119,21 @@ Pngout is new in version 1.1.0 and is not enabled by default because it is resou
 
 Yes, but only if the optimized version is smaller. The plugin should NEVER create a larger image.
 
+= Can I resize my images with this plugin? =
+
+No, that would be a lossy operation, and we try to avoid that. Use Imsanity.
+
+= Can I lower the compression setting for JPGs to save more space? =
+
+Again, that would be a lossy operation, and we try to avoid that. Use Imsanity.
+
 = The bulk optimizer doesn't seem to be working, what can I do? =
 
-First, upgrade to the latest version. Since version 1.0.8, each image is given 50 seconds to complete (which actually doesn't include time used by the optimization utilities). You can also increase the setting max_execution_time in your php.ini file. That said, there are other timeouts with Apache, and possibly other limitations of your webhost. If you've tried everything else, the last thing to look for is large PNG files. In my tests on a shared hosting setup, "large" is anything over 300 KB. You can first try decreasing the PNG optimization level in the settings. If that doesn't work, perhaps you ought to convert that PNG to JPG. Screenshots are often done as PNG files, but that is a poor choice for anything with photographic elements.
+Each image is given 50 seconds to complete (which actually doesn't include time used by the optimization utilities). If that doesn't seem to do the trick, you can also increase the setting max_execution_time in your php.ini file. That said, there are other timeouts with Apache, and possibly other limitations of your webhost. If you've tried everything else, the last thing to look for is large PNG files. In my tests on a shared hosting setup, "large" is anything over 300 KB. You can first try decreasing the PNG optimization level in the settings. If that doesn't work, perhaps you ought to convert that PNG to JPG. Screenshots are often done as PNG files, but that is a poor choice for anything with photographic elements.
 
 = What are the supported operating systems? =
 
-I've tested it on Windows (with Apache), Linux, Mac OSX, and FreeBSD.
+I've tested it on Windows (with Apache), Linux, Mac OSX, FreeBSD, and Solaris (v10). The cloud service will run on any OS.
 
 = How are JPGs optimized? =
 
@@ -131,8 +165,109 @@ That's not a question, but since I made it up, I'll answer it. See the Image Opt
 
 = future =
 * these are possible future bugfixes and/or feature requests, if you see a feature you like here, go vote for it in the support forum
-* BuddyPress integration
-* SunOS (Solaris/OpenIndiana) support
+* throttling: ability to specify number of images to optimize in a batch via bulk optimize, and seconds between batches
+* show statistics: display cumulative savings and computation time in status section
+* webp support
+* jpegmini server integration (for resizes only)
+* tinypng api integration (again, for resizes only)
+* FlaGallery optimize on upload does not work with plupload (only the browser-based method works properly). This will be implemented in a future release.
+* huge thanks to those who have done localization/translation for Dutch, Romanian, and Spanish. See http://wordpress.org/plugins/ewww-image-optimizer/other_notes/ for more information. If you would like to help translate this plugin in your language, post a thread on the support forums.
+
+= 1.7.6 =
+* fixed: color of progressbar for 4 more admin themes in WP 3.8
+* changed: metadata stripping now applies to PNG images, but only if using optipng 0.7.x
+* added: ability to remove individual images from the Optimize More table
+* fixed: Optimize More was using case-insensitive queries for matching paths
+* fixed: Optimize More was unable to record image sizes over 8388607 bytes
+* removed: obsolete jquery 1.9.1 file used for maintaining backwards compatiblity with really old versions of WP
+* fixed: weirdness with paths preventing Windows servers from activating, and cleanup of plugin path code
+
+= 1.7.5 =
+* new version of gifsicle (1.78), for more detail, see http://www.lcdf.org/gifsicle/changes.html
+* proper detection of Cloudinary images instead of error message
+* plays nicer with Imsanity, detect when a newly uploaded image has been modified and optimized already (instead of re-optimizing)
+* Dutch translation - nl_NL
+* Romanian translation - ro_RO
+* Spanish translation - es_ES
+* Cloudinary integration: auto-upload after optimization when uploading to Media Library, must be enabled in settings
+* debugging output for Media Library (let's you see resizes)
+* visual tweaking for upcoming WP 3.8
+* better checking for safe_mode
+
+= 1.7.4 =
+* fixed: some settings were set to incorrect defaults after enabling and disabling cloud features
+* fixed: invalid status on some systems for 'tar' command
+* new: SunOS support - OpenIndiana and Solaris
+* fixed: resizes not properly checking for re-optimization prevention
+
+= 1.7.3 =
+* fixed: some security plugins disable Optimize More - use install_themes permission instead of edit_themes
+* fixed: table schema changes not firing on upgrade
+* changed: bulk_attachment variables are not autoloaded to improve performance
+
+= 1.7.2 =
+* added: internationalization - need volunteers to provide translations. If interested, post a support thread with the language you would like to help with.
+* fixed: Import button not shown on Optimize More in some cases
+* fixed: Bulk Optimize for Nextgen was broken
+* changed: file comparison from md5sum to filesize for Optimize More to improve load time
+* added: quota information for cloud users on settings page
+* fixed: sub-folders of uploads directory were not allowed if /uploads is outside of wp folder
+* changed: increased cloud_verify timeout to avoid false results
+* added: link to status page for cloud service on settings page
+* fixed: debug log created if it does not exist already
+
+= 1.7.1 =
+* fixed: syntax error causing white screen of death for Nextgen v2
+
+= 1.7.0 =
+* added: ability to optimize specified folders within your wordpress install
+* added: option to optimize on a schedule for images that cannot be automatically optimized on upload (buddypress, symposium, metaslider, user-specified folders)
+* added: WP Symposium support via 'Optimize More' in Tools menu
+* added: BuddyPress Activity Plus support via 'Optimize More'
+* fixed: unnecessary check for 'file' field in attachment metadata
+* fixed: network-level settings are not reset on deactivation and reactivation
+* fixed: blog-level settings not displayed when activated at the blog-level on multi-site
+* added: Any plugin that uses wp_image_editor (GD, Imagick, and Gmagick implementations) will be auto-optimized on upload
+* fixed: Optimize More will crash if one of the standard folders does not exist (e.g.: buddypress avatar folders)
+* fixed: filenames are escaped to prevent potential crashes and security risks
+* fixed: temporary jpgs are checked to be sure they exist to avoid warnings
+* fixed: prevent warnings on bulk optimize due to empty arrays
+* fixed: don't check permissions until after we know file exists
+* fixed: WP get_attached_file() doesn't always work, try other methods to get attachment path
+* removed: deprecated setting to skip utility verification
+* fixed: init not firing for plugins with front-end functionality
+* fixed: suppress warnings if corrupt jpg crashes jpegtran
+* added: screencasts on plugin Installation page
+
+= 1.6.3 =
+* plugin will failover gracefully if one of the cloud optimization servers is offline
+* prevent excess database calls when optimizing theme images
+* fixed plugin mangles metadata for Image Store plugin
+* added optimization support for Image Store plugin
+* verify md5 on buddypress optimization, so changed images will get re-optimized by the bulk tool
+* cleaned up settings page (mostly) for cloud users
+
+= 1.6.2 =
+* added license exceeded status into status message so users know if they've gone over
+* prevent tool checks and cloud verification from firing on every page load, yikes...
+
+= 1.6.1 =
+*fixed: temporary jpgs were not being deleted (leftovers from testing for last release)
+*fixed: jpgs would not be converted to pngs if jpgs had already been optimized
+*fixed: cloud service not converting gif to png
+
+= 1.6.0 =
+* Cloud Optimization option (BETA: get your free API key at http://www.exactlywww.com/cloud/)
+* fixed if exec() is disabled or safe mode is on, don't bother testing local tools
+* more tweaks for exec() detection, including suhosin extension
+
+= 1.5.0 =
+* BuddyPress integration to optimize avatars
+* added function to optimize all images in currently active theme
+* full compatibility with NextGEN 2.0.x
+* thumbnails are now optimized automatically on upload with NextGEN 2.0.x
+* fixed detection of disabled exec() function when exec is the first function in the list
+* use internal wordpress functions for retrieving image path, displaying filesize, building redirect urls, and downloading pngout
 
 = 1.4.4 =
 * fixed bulk optimization functions for non-English users in NextGEN
@@ -329,8 +464,28 @@ That's not a question, but since I made it up, I'll answer it. See the Image Opt
 
 == Upgrade Notice ==
 
-= 1.4.4 =
+= 1.7.6 =
+* metadata stripping now applies to PNG images, but only if using optipng 0.7.x, you may want to run a bulk optimize on all your PNG images to make sure you have the best possible optimization
 
+= 1.7.5 =
+* New version of gifsicle that has quite a few improvements. If you have restricted permissions on the wp-content/ewww/ folder, you may need to temporarily change them to allow the plugin to perform the gifsicle upgrade automatically.
+
+= 1.7.2 =
+* Optimize More table format has changed, make sure to visit Optimize More and Convert your table immediately after upgrade if you are running it in scheduled mode.
+
+= 1.7.0 =
+* More third-party plugins supported via custom paths, and the Optimize More tool (which can also run via cron now). Also check out new screencasts on the Installation page.
+
+= 1.6.2 =
+* All Cloud users should upgrade immediately to avoid extended page load times
+
+= 1.6.1 =
+* New Cloud Optimization option for those who can't (or won't) enable exec() on their servers (BETA: get your free API key at http://www.exactlywww.com/cloud/)
+
+= 1.5.0 =
+Fixes and enhancements for NextGEN 2, Buddypress support, and theme image optimization
+
+= 1.4.4 =
 bugfix release for nextgen users only, everyone else can ignore this release
 
 = 1.4.0 =
@@ -366,3 +521,42 @@ Improved performance for PNGs by specifying proper optimization level
 == Contact and Credits ==
 
 Written by [Shane Bishop](http://www.shanebishop.net). Based upon CW Image Optimizer, which was written by [Jacob Allred](http://www.jacoballred.com/) at [Corban Works, LLC](http://www.corbanworks.com/). CW Image Optimizer was based on WP Smush.it.
+[Hammer](http://thenounproject.com/noun/hammer/#icon-No1306) designed by [John Caserta](http://thenounproject.com/johncaserta) from The Noun Project.
+[Images](http://thenounproject.com/noun/images/#icon-No22772) designed by [Simon Henrotte](http://thenounproject.com/Gizmodesbois) from The Noun Project.
+
+== Webhosts ==
+
+In general, these lists only apply to shared hosting services. If the providers below have VPS or dedicated server options, those will likely work just fine. If you have any contributions or corrections to these lists, please contact me via the form at http://www.shanebishop.net
+
+Webhosts where things work out of the box.
+
+* [Bluehost](http://www.bluehost.com)
+* [Dreamhost](http://www.dreamhost.com)
+* [GoDaddy](http://www.godaddy.com) (only with PHP 5.3)
+* [gPowerHost](https://gpowerhost.com/)
+* [HostGator](http://www.hostgator.com)
+* [Hetzner Online](http://www.hetzner.de)
+* [Hosterdam](http://www.hosterdam.com) (FreeBSD)
+* [Namecheap](http://www.namecheap.com)
+* [OVH](http://www.ovh.co.uk)
+* [WebFaction](http://www.webfaction.com)
+
+Webhosts where the plugin will only work in cloud mode or only some tools are installed locally.
+
+* ipower
+* Gandi
+* ipage (JPG only)
+* WP Engine - use EWWW Image Optimizer Cloud fork: http://wordpress.org/plugins/ewww-image-optimizer-cloud/
+
+== Translations ==
+
+Translators: 
+Romanian translation by MediasInfo.ro.
+Spanish translation by Andrew Kurtis of WebHostingHub.
+Dutch translation by Ludo Rubben.
+
+1. Please post in the support forums announcing your intent to translate the plugin into a particular language. 
+1. Download ewww-image-optimizer.pot from the plugin /languages/ folder.
+1. Fill in the msgstr for each msgid and complete the header information as best as you can.
+1. Save it as a .po file.
+1. Submit it via the form at http://www.shanebishop.net/contact-me/
